@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eterea · Skin care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo">Eterea</div>
+    <nav>
+      <a href="#productos">Productos</a>
+      <a href="#comparar">Comparar precios</a>
+      <!-- <a href="#Contanto">Contactanos</a> -->
+      <a href="https://wa.me/3137396639?text=%C2%A1Hola!%20Quiero%20mas%20informacion%20sobre%20los%20productos%20de%20Et%C3%A9rea."
+          target="_blank"
+          rel="noopener noreferrer"
+      >
+          Contactanos
+      </a>
+      <!-- AGREGAR AQUÍ: más enlaces del menú (ej. <a href="#blog">Blog</a>) -->
+    </nav>
+    <button class="btn ghost" id="btnLogin">Ingresar</button>
+    <button class="btn" id="btnCart">Carrito<span class="cart-count" id="cartCount">0</span></button>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <h1>Tu rutina de piel, al mejor precio</h1>
+      <p>Compra tu rutina ideal, y compara cuánto cuestan en otras tiendas antes de pagar.</p>
+      <a class="btn" href="#productos" style="text-decoration:none;display:inline-block">Ver productos</a>
+    </div>
+  </section>
+
+  <section id="productos">
+    <div class="wrap">
+      <div class="head">
+        <h2>Productos</h2>
+        <div class="chips" id="chips"></div>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section id="comparar">
+    <div class="wrap">
+      <div class="head">
+        <h2>Comparar precios</h2>
+        
+        <input type="search" id="buscar" placeholder="Buscar producto" aria-label="Buscar producto">
+        <h3>Los precios 999.999 indican que la tienda no tiene el producto</h3>
+      </div>
+      <div class="table-box">
+        <table>
+          <thead id="thead"></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+      <p style="color:var(--muted);font-size:14px">Los precios de otras tiendas pueden variar debido a promociones o descuentos.</p>
+    </div>
+  </section>
+
+  <!-- AGREGAR AQUÍ: nuevas secciones (testimonios, blog, contacto, preguntas frecuentes) -->
+  <!-- Copia este bloque:
+  <section id="mi-seccion"><div class="wrap"><div class="head"><h2>Título</h2></div> contenido </div></section> -->
+</main>
+
+<footer><div class="wrap">© 2026 Eterea. Todos los derechos reservados.</div></footer>
+
+<!-- LOGIN / REGISTRO -->
+<div class="overlay" id="loginOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+    <h3 id="loginTitle">Ingresar</h3>
+    <div class="tabs" role="tablist">
+      <button role="tab" id="tabIn" aria-selected="true">Ingresar</button>
+      <button role="tab" id="tabUp" aria-selected="false">Crear cuenta</button>
+    </div>
+    <label for="user">Usuario</label>
+    <input id="user" autocomplete="username">
+    <label for="pass">Contraseña</label>
+    <input id="pass" type="password" autocomplete="current-password">
+    <p class="err" id="err" role="alert"></p>
+    <button class="btn" id="submitAuth">Ingresar</button>
+    <button class="btn ghost" id="closeLogin" style="margin-top:8px">Cancelar</button>
+  </div>
+</div>
+
+<!-- CARRITO -->
+<aside class="drawer" id="drawer" aria-label="Carrito">
+  <h3>Tu carrito</h3>
+  <div class="lines" id="lines"></div>
+  <div class="sum">
+    <div class="coupon"><input id="coupon" placeholder="Código de descuento" aria-label="Código de descuento"><button class="btn ghost" id="applyCoupon">Aplicar</button></div>
+    <div class="row"><span>Subtotal</span><span id="subtotal">$0</span></div>
+    <div class="row" id="rowDisc" hidden><span id="discLabel">Descuento</span><span id="disc"></span></div>
+    <div class="row"><span>Envío</span><span id="ship">""</span></div>
+    <div class="row muted"><span>IVA incluido</span><span id="iva">$0</span></div>
+    <div class="total"><span>Total</span><span id="total">$0</span></div>
+  </div>
+  <button class="btn" id="checkout">Comprar</button>
+  
+  <button class="btn ghost" id="closeCart" style="margin-top:8px">Seguir viendo</button>
+</aside>
+<!-- CARACTERÍSTICAS DEL PRODUCTO -->
+<div class="overlay" id="detailOverlay">
+  <div class="modal detail" role="dialog" aria-modal="true" aria-labelledby="dTitle">
+    <div class="shot" id="dShot"></div>
+    <h3 id="dTitle"></h3>
+    <p id="dDesc" class="muted"></p>
+    <dl class="specs" id="dSpecs"></dl>
+    <p class="muted" id="dCompare"></p>
+    <div class="dfoot"><span class="price" id="dPrice"></span><button class="btn" id="dAdd">Agregar al carrito</button></div>
+    <button class="btn ghost" id="dClose" style="margin-top:8px">Cerrar</button>
+  </div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
+
+
+<!--borrar si no sirve* -->
+<div id="checkoutModal" class="co-modal">
+  <div class="co-content">
+    <button id="closeCheckout" class="co-close" type="button">×</button>
+
+    <h2>Finalizar compra</h2>
+    <p>Completa tus datos para preparar tu pedido en Etérea.</p>
+
+    <form id="checkoutForm">
+
+      <label>Nombre completo</label>
+      <input type="text" id="nombreCliente" required placeholder="Tu nombre completo">
+
+      <label>Teléfono</label>
+      <input type="tel" id="telefonoCliente" required placeholder="Tu número de contacto">
+
+      <label>Cédula</label>
+      <input type="text" id="cedulaCliente" required placeholder="Número de identificación">
+
+      <label>Dirección de entrega</label>
+      <input type="text" id="direccionCliente" required placeholder="Dirección completa">
+
+      <label>Ciudad de destino</label>
+      <input type="text" id="ciudadCliente" required placeholder="Ciudad">
+
+      <!-- <label>Método de pago</label>
+      <select id="metodoPago" required>
+        <option value="">Selecciona un método de pago</option>
+        <option value="Nequi">Nequi: 3137396639</option>
+        <option value="Daviplata">Daviplata: 3137396639</option>
+        <option value="Llave">Llave:NEQUIKAR21928</option>
+      </select> -->
+    
+      <label>Método de pago</label>
+      <p>Titular de la cuenta: Karla Martinez Cobos</p>
+      <div class="metodos-pago">
+        <div class="seccion-pago" id="seccionpago">
+          
+          <p>Nequi: <strong>3137396639</strong></p>
+          <img src="img/Nequi.jpeg" alt="Nequi">
+        </div>
+
+        <div class="seccion-pago" id="seccionpago">
+          <p>Llave: <strong>NEQUIKAR21928</strong></p>
+          <img src="img/LlaveNequi.jpeg" alt="Llave">
+        </div>
+
+        <div class="seccion-pago" id="seccionpago">
+          <p>Daviplata: <strong>3137396639</strong></p>
+          <img src="img/Daviplata.jpeg" alt="Daviplata">
+        </div>
+      </div>
+
+
+      <!-- <label>Adjuntar comprobante de pago</label>
+        <input type="image" id="comprobantePago" accept="image/*">
+      <div id="infoPago" style="display:none;"></div> -->
+
+      <p>Adjunta el comprobante de pago en el mensaje de WhatsApp</p>
+
+      <div id="resumenPedido"></div>
+      
+      <button type="submit" class="btn-comprar">
+        Confirmar pedido por WhatsApp
+      </button>
+
+    </form>
+  </div>
+</div>
+
